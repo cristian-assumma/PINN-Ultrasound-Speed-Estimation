@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dati e Modelli
+data/
+*.mat
+*.h5
+*.hdf5
+*.pt
+*.pth
+checkpoints/
+runs/
