@@ -84,6 +84,8 @@ pinn-ultrasound-speed-estimation/
 └── README.md
 ```
 
+---
+
 ## 💻 Getting Started
 
 ### 1. Environment Setup
