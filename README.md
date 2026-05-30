@@ -15,8 +15,7 @@ Conventional medical ultrasound reconstructs B-mode images under a strong simpli
 
 In reality, biological tissues are acoustically heterogeneous. This physical mismatch induces kinematic errors, leading to severe phase aberrations, loss of lateral resolution, and geometric distortions. 
 
-![The Problem](<img width="842" height="204" alt="Screenshot 2026-05-30 234905" src="https://github.com/user-attachments/assets/96465c64-0d46-45da-9c50-04d96482dd3a" />
-)
+![The Problem](<img width="842" height="204" alt="Screenshot 2026-05-30 234905" src="https://github.com/user-attachments/assets/96465c64-0d46-45da-9c50-04d96482dd3a" />)
 *> Clinical impact of sound speed mismatch: defocusing and geometric warping.*
 
 To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must solve a highly non-linear, ill-posed inverse scattering problem to recover the true sound speed map from boundary echoes.
