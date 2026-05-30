@@ -16,6 +16,7 @@ Conventional medical ultrasound reconstructs B-mode images under a strong simpli
 In reality, biological tissues are acoustically heterogeneous. This physical mismatch induces kinematic errors, leading to severe phase aberrations, loss of lateral resolution, and geometric distortions. 
 
 ![The Problem](assets/aberration_problem.png)
+
 *> Clinical impact of sound speed mismatch: defocusing and geometric warping.*
 
 To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must solve a highly non-linear, ill-posed inverse scattering problem to recover the true sound speed map from boundary echoes.
@@ -61,15 +62,12 @@ The codebase is structured following professional software engineering standards
 ```text
 pinn-ultrasound-speed-estimation/
 ├── configs/                    # YAML configurations (grid specs, epochs, lr)
+├── assets/                     # Images for the README
 ├── data/                       
 │   ├── dataset/                # Excluded from Git via .gitignore
 │   │   ├── anechoic_cyst/      # Multi-view .mat files
 │   │   └── two_layers/         
 │   └── README.md               # Contains Kaggle Download Links
-├── notebooks/                  
-│   ├── 01_data_exploration.ipynb
-│   ├── 02_incident_wave_fit.ipynb
-│   └── 03_evaluation.ipynb     # Downstream beamforming & metrics
 ├── src/                        
 │   ├── config.py               # Global dataclass configurations
 │   ├── data_loader.py          # PyTorch Dataset for HDF5/v7.3 Matlab files
@@ -81,3 +79,5 @@ pinn-ultrasound-speed-estimation/
 ├── main.py                     # Entry point for the training loop
 ├── requirements.txt            
 └── README.md
+
+
