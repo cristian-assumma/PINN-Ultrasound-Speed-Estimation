@@ -82,5 +82,48 @@ pinn-ultrasound-speed-estimation/
 ├── main.py                     # Entry point for the training loop
 ├── requirements.txt            
 └── README.md
+```
+
+## 💻 Getting Started
+
+### 1. Environment Setup
+Clone the repository and create a clean virtual environment:
+
+```bash
+git clone https://github.com/cristian-assumma/pinn-ultrasound-speed-estimation.git
+cd pinn-ultrasound-speed-estimation
+python -m venv venv
+# On Windows use: .\venv\Scripts\activate
+source venv/bin/activate  
+pip install -r requirements.txt
+```
+
+### 2. Dataset Download
+The raw ultrasound RF data is hosted on Kaggle due to GitHub file size limits.  
+Please refer to the instructions in `data/README.md` to download the `anechoic_cyst` and `two_layers` datasets and place them in the correct directory.
+
+### 3. Run the Optimization
+To start the physics-informed inversion process on a selected case:
+
+```bash
+python main.py
+```
+
+The framework will automatically generate a `Results/Run_XX/` folder containing training logs, model checkpoints, and diagnostic plots generated every 100 epochs.
+
+---
+
+## 📬 Contact
+
+**Cristian Assumma**  
+*MSc Biomedical Engineer | AI Healthcare & MedTech*
+
+* [LinkedIn](https://www.linkedin.com/in/cristian-assumma-08890b224)
+* [GitHub](https://github.com/cristian-assumma)
+
+---
+
+> This project highlights the potential of merging continuous neural representations with established physical laws to push the boundaries of clinical ultrasound diagnostics.
+
 
 
