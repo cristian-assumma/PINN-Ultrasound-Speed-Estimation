@@ -1,8 +1,7 @@
-# 🚀 Physics-Informed Neural Networks (PINNs) for Ultrasound Sound Speed Estimation
+# 🚀 Physics-Informed Neural Networks (PINNs) for Sound Speed Estimation from Multi-View Ultrasound Data
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Domain](https://img.shields.io/badge/Domain-MedTech%20%7C%20AI-success.svg)](#)
 
 A modular, physics-driven Deep Learning framework for quantitative ultrasound imaging. This repository provides a dual-network PINN architecture designed to estimate spatially varying sound speed maps directly from raw, multi-view radiofrequency (RF) data.
