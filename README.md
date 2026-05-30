@@ -1,4 +1,5 @@
-# 🚀 Physics-Informed Neural Networks (PINNs) for Sound Speed Estimation from Multi-View Ultrasound Data
+# 🚀 <img width="842" height="204" alt="Screenshot 2026-05-30 234905" src="https://github.com/user-attachments/assets/d3c5c8a0-b126-4ae2-a787-dd3be1e5ba53" />
+Physics-Informed Neural Networks (PINNs) for Sound Speed Estimation from Multi-View Ultrasound Data
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
@@ -15,7 +16,8 @@ Conventional medical ultrasound reconstructs B-mode images under a strong simpli
 
 In reality, biological tissues are acoustically heterogeneous. This physical mismatch induces kinematic errors, leading to severe phase aberrations, loss of lateral resolution, and geometric distortions. 
 
-![The Problem](assets/aberration_problem.png)
+![The Problem](<img width="842" height="204" alt="Screenshot 2026-05-30 234905" src="https://github.com/user-attachments/assets/96465c64-0d46-45da-9c50-04d96482dd3a" />
+)
 *> Clinical impact of sound speed mismatch: defocusing and geometric warping.*
 
 To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must solve a highly non-linear, ill-posed inverse scattering problem to recover the true sound speed map from boundary echoes.
