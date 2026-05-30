@@ -1,5 +1,4 @@
-# 🚀 <img width="842" height="204" alt="Screenshot 2026-05-30 234905" src="https://github.com/user-attachments/assets/d3c5c8a0-b126-4ae2-a787-dd3be1e5ba53" />
-Physics-Informed Neural Networks (PINNs) for Sound Speed Estimation from Multi-View Ultrasound Data
+# 🚀 Physics-Informed Neural Networks (PINNs) for Sound Speed Estimation from Multi-View Ultrasound Data
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
