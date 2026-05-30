@@ -51,8 +51,11 @@ The framework was validated on 28 synthetic domains simulated with k-Wave, inclu
 * **Bulk Property Estimation**: The PINN acts as an optimal kinematic corrector. It accurately recovers the mean sound speed with a **Mean Absolute Error (MAE) of 0.77 m/s** on anechoic cysts and **1.82 m/s** on two-layer phantoms.
 * **Phase Aberration Correction**: When the predicted maps are integrated into downstream Delay-and-Sum beamforming, the Structural Similarity Index (SSIM) improves dramatically. The framework achieves a **90.0% success rate** in restoring spatial coherence for challenging oblique insonations.
 
-![Beamforming Results](assets/results_ssim.png)
-*> Left: Distorted B-Mode with standard 1540 m/s assumption. Right: Phase coherence restored using the PINN-estimated sound speed map.*
+![Beamforming Results](assets/anechoic_cyst_0.png)
+*> Results in Anechoic Cysts at 0°. Left: Distorted B-Mode with standard 1540 m/s assumption. Middle: Phase coherence restored using the PINN-estimated sound speed map. Right: Ideal B-Mode Images with ground truth sound speed maps.*
+
+![Beamforming Results](assets/anechoic_cyst_15.png)
+*> Results in Anechoic Cysts at angled degrees. Left: Distorted B-Mode with standard 1540 m/s assumption. Middle: Phase coherence restored using the PINN-estimated sound speed map. Right: Ideal B-Mode Images with ground truth sound speed maps.*
 
 ---
 
