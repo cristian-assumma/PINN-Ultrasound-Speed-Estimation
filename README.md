@@ -25,6 +25,8 @@ To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must sol
 ## 🔬 Our Solution: Multi-View PINN Framework
 Standard data-driven Deep Learning models lack physical interpretability and struggle to generalize across unseen clinical geometries. Classical Full Waveform Inversion (FWI) is computationally prohibitive and vulnerable to cycle skipping.
 
+![Cycle Skipping](assets/cycle_skipping.png)
+
 This framework bridges the gap by embedding the acoustic wave equation directly into the neural network's loss function, using a **Multi-View protocol (-15°, 0°, +15°)** to actively break the depth-velocity ambiguity inherent to reflection-mode imaging.
 
 ### Dual-Network Architecture
