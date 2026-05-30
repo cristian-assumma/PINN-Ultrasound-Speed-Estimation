@@ -16,6 +16,7 @@ Conventional medical ultrasound reconstructs B-mode images under a strong simpli
 In reality, biological tissues are acoustically heterogeneous. This physical mismatch induces kinematic errors, leading to severe phase aberrations, loss of lateral resolution, and geometric distortions. 
 
 ![The Problem](aberration_problem.png)
+<img width="424" height="445" alt="Screenshot 2026-05-30 235842" src="https://github.com/user-attachments/assets/7841ba9b-6c7d-444b-a203-d5d73249f249" />
 *> Clinical impact of sound speed mismatch: defocusing and geometric warping.*
 
 To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must solve a highly non-linear, ill-posed inverse scattering problem to recover the true sound speed map from boundary echoes.
@@ -23,12 +24,14 @@ To transition from qualitative to **Quantitative Ultrasound (QUS)**, we must sol
 ---
 
 ## 🔬 Our Solution: Multi-View PINN Framework
-Standard data-driven Deep Learning models lack physical interpretability and struggle to generalize across unseen clinical geometries. Classical Full Waveform Inversion (FWI) is computationally prohibitive and vulnerable to cycle skipping. 
+Standard data-driven Deep Learning models lack physical interpretability and struggle to generalize across unseen clinical geometries. Classical Full Waveform Inversion (FWI) is computationally prohibitive and vulnerable to cycle skipping.
 
 This framework bridges the gap by embedding the acoustic wave equation directly into the neural network's loss function, using a **Multi-View protocol (-15°, 0°, +15°)** to actively break the depth-velocity ambiguity inherent to reflection-mode imaging.
 
 ### Dual-Network Architecture
 ![PINN Architecture](assets/pinn_architecture.png)
+
+
 
 1. **SpeedNet**: A constrained MLP that estimates the continuous, spatially varying sound speed map ($c(x,z)$).
 2. **WaveFieldNet**: Reconstructs the high-frequency spatiotemporal scattered pressure field ($p_{sct}$). It utilizes **Anisotropic Fourier Features** and a targeted **7.5 MHz Frequency Injection** to overcome the spectral bias of standard neural networks.
