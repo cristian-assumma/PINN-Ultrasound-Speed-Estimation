@@ -4,39 +4,50 @@ import numpy as np
 
 class AnalyticalIncidentWave(nn.Module):
     """
-    Simula l'onda incidente basandosi su una Gabor Wavelet fittata.
+    Simulates the incident ultrasound wave based on a fitted Gabor wavelet.
+    This provides the analytical source term required for the physical PDE constraint.
     """
     def __init__(self, config, gabor_params):
         super().__init__()
         self.cfg = config
         
-        # Parametri Gabor passati esplicitamente
+        # Explicitly passed Gabor parameters (amplitude scaled by reference pressure)
         self.A = gabor_params['A'] / config.norm.U_ref
         self.sigma = gabor_params['sigma']
         self.omega = gabor_params['omega']
         self.phi = gabor_params['phi']
         self.t0 = gabor_params['t0']
 
-        # Pre-calcoliamo la durata totale dell'acquisizione
-        # (Se Nt non è in config.physics, lo dedurremo altrove, ma qui assumiamo il fallback)
+        # Pre-compute the total acquisition duration
+        # Falls back to a default number of time samples (Nt = 2030) if not explicitly defined
         Nt = getattr(config.physics, 'Nt', 2030)
         self.T_acq = Nt * config.physics.dt_grid
         self.c0 = config.physics.c0
 
     def forward(self, x, z, t, theta_deg, angle_idx, t_delays_s_tensor):
         """
-        Calcola l'ampiezza dell'onda incidente e la sua derivata seconda temporale (u_tt).
+        Computes the incident wave amplitude and its analytical second-order time derivative (u_tt).
+        
+        Args:
+            x, z, t: Normalized spatial and temporal coordinates in [-1, 1].
+            theta_deg: Steering angle of the plane wave in degrees.
+            angle_idx: Index of the current steering angle.
+            t_delays_s_tensor: Tensor containing specific temporal delays for each angle.
+            
+        Returns:
+            u_inc: Amplitude of the incident wave at (x, z, t).
+            u_inc_tt: Second-order time derivative of the incident wave.
         """
-        # ---- Denormalizzazione spazio ----
+        # Spatial coordinate denormalization 
         z_phys = (z + 1.0) * 0.5 * self.cfg.physics.z_max
         x_width = self.cfg.physics.x_width
         x_min = self.cfg.physics.x_min
         x_phys = (x + 1.0) * 0.5 * x_width + x_min
 
-        # ---- Denormalizzazione tempo ----
+        # Temporal coordinate denormalization 
         t_phys = (t + 1.0) * 0.5 * self.T_acq
 
-        # ---- Steering ----
+        # Beam steering and delay calculation
         theta_rad = torch.deg2rad(theta_deg)
         dist_proj = x_phys * torch.sin(theta_rad) + z_phys * torch.cos(theta_rad)
 
@@ -45,12 +56,12 @@ class AnalyticalIncidentWave(nn.Module):
         tau = dist_proj / self.c0 + current_delay
         t_loc = t_phys - tau - self.t0
 
-        # ---- Gabor differenziabile (Autograd-friendly) ----
+        # Differentiable Gabor wavelet (Autograd-compatible)
         g = torch.exp(-(t_loc**2) / (2 * self.sigma**2))
         s = torch.sin(self.omega * t_loc + self.phi)
         u_inc = self.A * g * s
 
-        # Derivate analitiche seconde (u_tt)
+        # Analytical second-order time derivatives (u_tt)
         g_dt = -(t_loc / self.sigma**2) * g
         g_dt2 = ((t_loc**2 / self.sigma**4) - (1 / self.sigma**2)) * g
 
