@@ -5,7 +5,7 @@ import numpy as np
 from dataclasses import dataclass
 
 def set_seed(seed=42):
-    """Garantisce riproducibilità assoluta."""
+    """Ensures absolute reproducibility across runs."""
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -16,17 +16,19 @@ def set_seed(seed=42):
         torch.backends.cudnn.benchmark = False
 
 def get_device():
+    """Detects and returns the available hardware device (GPU or CPU)."""
     return torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 @dataclass
 class PhysicsConfig:
-    c0: float = 1540.0
-    rho0: float = 1000.0
-    f_c: float = 7.5e6
-    dx_grid: float = 4.928e-05
-    dt_grid: float = 3.2e-08
-    pitch: float = 3.0e-04
-    num_elements: int = 128
+    """Immutable constants defining the physical problem and acquisition grid."""
+    c0: float = 1540.0         # Reference sound speed (m/s)
+    rho0: float = 1000.0       # Reference density (kg/m^3)
+    f_c: float = 7.5e6         # Transducer central frequency (Hz)
+    dx_grid: float = 4.928e-05 # k-Wave spatial step (m)
+    dt_grid: float = 3.2e-08   # k-Wave time step (s)
+    pitch: float = 3.0e-04     # Transducer element pitch (m)
+    num_elements: int = 128    # Number of transducer elements
 
     @property
     def z_max(self) -> float:
@@ -46,6 +48,7 @@ class PhysicsConfig:
 
 @dataclass
 class NormalizationConfig:
+    """Constants for non-dimensionalizing the PDE to [-1, 1]."""
     L_ref: float = 0.05 
     U_ref: float = 1.0
 
@@ -54,12 +57,13 @@ class NormalizationConfig:
         return self.L_ref / 1540.0
 
 class GlobalConfig:
+    """Master configuration container for hyperparameters and paths."""
     def __init__(self, dataset_type="anechoic_cyst", case_name="case_0012"):
         self.seed = 1234
         self.device = get_device()
         
-        # Percorsi relativi alla root del repository
-        # Assumiamo che i dati siano in: pinn-ultrasound-speed-estimation/data/dataset/...
+        # Relative paths from the repository root
+        # Assuming data is located in: pinn-ultrasound-speed-estimation/data/dataset/...
         project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.dataset_path = os.path.join(project_root, "data", "dataset", dataset_type, case_name)
         
