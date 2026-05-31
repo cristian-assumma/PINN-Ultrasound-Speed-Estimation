@@ -117,7 +117,7 @@ The framework will automatically generate a `Results/Run_XX/` folder containing 
 
 ## 📬 Contact
 
-**Cristian Assumma**  
+**Ing. Cristian Assumma**  
 *MSc Biomedical Engineer | AI Healthcare & MedTech*
 
 * [LinkedIn](https://www.linkedin.com/in/cristian-assumma-08890b224)
@@ -125,7 +125,7 @@ The framework will automatically generate a `Results/Run_XX/` folder containing 
 
 ---
 
-> This project highlights the potential of merging continuous neural representations with established physical laws to push the boundaries of clinical ultrasound diagnostics.
+> This framework demostrates the efficacy of constraining continuous neural representations with the aciustic wave equation to resolve kinematic mismatches and restore spatial coherence in quantitative ultasound.
 
 
 
