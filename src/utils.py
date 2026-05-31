@@ -3,7 +3,7 @@ import torch
 import matplotlib.pyplot as plt
 
 def get_next_run_name(base_dir):
-    """Gestione automatica delle cartelle Run_XX."""
+    """Automatically manages and generates sequential Run_XX directories for logging."""
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
     existing = [d for d in os.listdir(base_dir) if d.startswith("Run_") and os.path.isdir(os.path.join(base_dir, d))]
@@ -17,7 +17,7 @@ def get_next_run_name(base_dir):
     return f"Run_{next_num:02d}"
 
 def get_data_batch(multi_angle_data, target_angles, config, t_acq, batch_size=2000):
-    """Estrae batch casuale dai dati veri, inclusa la maschera."""
+    """Extracts a random spatiotemporal batch from the ground truth RF data, including time-gating masks."""
     device = config.device
     angles = list(multi_angle_data.keys())
     n_per_angle = batch_size // len(angles)
@@ -67,7 +67,7 @@ def get_data_batch(multi_angle_data, target_angles, config, t_acq, batch_size=20
     }
 
 def debug_gradients(model):
-    """Traccia la norma L2 dei gradienti per monitorare l'apprendimento."""
+    """Tracks the L2 norm of the gradients to monitor learning dynamics."""
     speed_sum, wave_sum = 0.0, 0.0
     speed_count, wave_count = 0, 0
 
@@ -85,7 +85,7 @@ def debug_gradients(model):
     return speed_mean, wave_mean
 
 def save_diagnostic_plot(model, epoch, run_dir, config, physics_engine, data_dict_multi, history):
-    """Genera il pannello visivo salvandolo su disco (nessun plt.show())."""
+    """Generates and saves a comprehensive diagnostic visual panel to disk (headless mode, no plt.show)."""
     model.eval()
     fig, axs = plt.subplots(2, 3, figsize=(18, 10))
     target_angles = config.target_angles
@@ -121,7 +121,7 @@ def save_diagnostic_plot(model, epoch, run_dir, config, physics_engine, data_dic
         axs[0, 2].legend()
         axs[0, 2].grid(True, which='both', alpha=0.3)
 
-    # (D) A-scan Compare
+    # (D) A-scan Compare (Masked)
     for i, ang_name in enumerate(target_angles):
         data = data_dict_multi.get(ang_name)
         if data:
