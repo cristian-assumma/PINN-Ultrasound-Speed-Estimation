@@ -10,7 +10,7 @@ class UltrasoundDataLoader:
         self.device = config.device
 
     def _read_mat_v73(self, filepath):
-        """Helper robusto per leggere file Matlab v7.3 HDF5."""
+        """Robust helper to read Matlab v7.3 (HDF5) files."""
         data = {}
         try:
             with h5py.File(filepath, 'r') as f:
@@ -31,12 +31,13 @@ class UltrasoundDataLoader:
                         data[key] = sub_data
             return data
         except Exception as e:
-            print(f"[ERROR] Impossibile leggere {filepath}: {e}")
+            print(f"[ERROR] Unable to read {filepath}: {e}")
             return None
 
     def load_dataset(self):
         """
-        Carica i dati COMPLETI e crea le MASCHERE temporali basate sugli angoli.
+        Loads the complete dataset and creates temporal MASKS based on steering angles 
+        to isolate the scattered echoes from the incident wave.
         """
         case_dir = self.cfg.dataset_path
         temp_data = {}
@@ -47,11 +48,11 @@ class UltrasoundDataLoader:
 
             data_dict = self._read_mat_v73(rf_path)
             if data_dict is None or 'sensor_data_p' not in data_dict:
-                raise ValueError(f"Dati mancanti in {angle_name}. Assicurati che il file esista in {rf_path}")
+                raise ValueError(f"Missing data for {angle_name}. Ensure the file exists at {rf_path}")
 
             rf_signal = data_dict['sensor_data_p'] 
             
-            # Masking Strategy
+            # Masking Strategy: ignore early samples containing the incident wave excitation
             mask_idx = 18 if "angle_+00" in angle_name else 218
             
             Nt = rf_signal.shape[1]
@@ -65,7 +66,7 @@ class UltrasoundDataLoader:
                 'theta_deg': float(angle_name.replace('angle_', '').replace('+', ''))
             }
 
-        # Calcolo U_ref sui dati mascherati
+        # Calculate U_ref strictly on the masked data (echoes only)
         global_max_val = 0.0
         for angle in temp_data:
             valid_signal = temp_data[angle]['signal'] * temp_data[angle]['mask']
@@ -76,7 +77,7 @@ class UltrasoundDataLoader:
         if self.cfg.norm.U_ref == 1.0:
             self.cfg.norm.U_ref = float(global_max_val)
 
-        # Caricamento Ground Truth e parametri finali
+        # Load Ground Truth and final physical parameters
         workspace_path = os.path.join(case_dir, "medium_and_sim_params.mat")
         global_params = self._read_mat_v73(workspace_path)
         full_speed_map = global_params['medium']['sound_speed']
@@ -108,7 +109,7 @@ class UltrasoundDataLoader:
                 't_axis': t_axis_phys
             }
 
-        # Nessun shift temporale applicato ai dati
+        # No temporal shifts applied to the data in this version
         t_delays_tensor = torch.zeros(len(self.cfg.target_angles), dtype=torch.float32, device=self.device)
 
         return multi_angle_data, c_true_tensor, t_delays_tensor
