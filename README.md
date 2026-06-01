@@ -125,7 +125,7 @@ The framework will automatically generate a `Results/Run_XX/` folder containing 
 
 ---
 
-> This framework demostrates the efficacy of constraining continuous neural representations with the aciustic wave equation to resolve kinematic mismatches and restore spatial coherence in quantitative ultasound.
+> This framework demonstrates the efficacy of constraining continuous neural representations with the acoustic wave equation to resolve kinematic mismatches and restore spatial coherence in quantitative ultrasound.
 
 
 
