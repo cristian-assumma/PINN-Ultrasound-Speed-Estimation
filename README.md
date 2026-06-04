@@ -46,8 +46,8 @@ This framework bridges the gap by embedding the acoustic wave equation directly 
 ### Dual-Network Architecture
 ![PINN Architecture](assets/pinn_architecture.png)
 
-1. **SpeedNet**: A constrained MLP that estimates the continuous, spatially varying sound speed map ($c(x,z)$).
-2. **WaveFieldNet**: Reconstructs the high-frequency spatiotemporal scattered pressure field ($p_{sct}$). It utilizes **Anisotropic Fourier Features** and a targeted **7.5 MHz Frequency Injection** to overcome the spectral bias of standard neural networks.
+1. **SpeedNet**: A constrained MLP that estimates the continuous, spatially varying sound speed map $c(x,z)$.
+2. **WaveFieldNet**: Reconstructs the high-frequency spatiotemporal scattered pressure field $p_{sct}$. It utilizes **Anisotropic Fourier Features** and a targeted **7.5 MHz Frequency Injection** to overcome the spectral bias of standard neural networks.
 
 ### Key Methodological Innovations
 * **Raw RF Physics-Informed Inversion**: Operates exclusively on raw RF data, completely avoiding the phase loss associated with conventional beamforming preprocessing.
